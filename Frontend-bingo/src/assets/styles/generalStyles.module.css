@@ -325,6 +325,7 @@ footer p {
     color: #9f9fb1;
     font-weight: 600;
     text-shadow: 2px 2px 5px white;
+    text-align: center;
 }
 
 /*^ escritorio pantallas de laptops */
@@ -423,7 +424,7 @@ footer p {
 
     .bingoLetterContainer {
         flex-direction: column;
-        width: 4.5rem;
+        width: 4rem;
     }
 
     .bingoLetterContainer_letter {
@@ -439,5 +440,10 @@ footer p {
     .modalPush {
         width: 20rem;
         height: 20rem;
+    }
+
+    /* footer */
+    footer p {
+        font-size: 0.8rem;
     }
 }
