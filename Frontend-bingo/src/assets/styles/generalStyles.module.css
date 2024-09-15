@@ -21,7 +21,7 @@ body {
 }
 
 .layerOpacity {
-    position: absolute;
+    position: fixed;
     z-index: 5;
     width: 100vw;
     height: 100vh;
@@ -42,7 +42,7 @@ body {
 .modal {
     display: flex;
     flex-wrap: wrap;
-    position: absolute;
+    position: fixed;
     z-index: 10;
     min-width: 10rem;
     max-width: 95vw;
@@ -51,8 +51,8 @@ body {
     ); /*22.5rem representa la mitad del alto, asi como 25rem la mitad del ancho*/
     left: calc(50vw - 25rem);
     width: 50rem;
-    height: 45rem;
-
+    min-height: 45rem;
+    height: auto;
     background-color: white;
     border: var(--borde);
     border-radius: 10px;
@@ -277,7 +277,7 @@ h1 {
 
 /* modalPush */
 .modalPushContainer {
-    position: absolute;
+    position: fixed;
 
     width: 100vw;
     height: 100vh;
