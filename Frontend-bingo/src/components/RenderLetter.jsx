@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import generalStyles from "../assets/styles/generalStyles.module.css";
 
-export const RenderLetter = ({ juega, setJuega }) => {
+export const RenderLetter = ({ juega, setJuega, letter, setLetter }) => {
     const letters = ["B", "I", "N", "G", "O", "Completa", "Otra"];
-    const [letter, setLetter] = useState("O");
 
     const [bloquesBtn, setBloquesBtn] = useState(
         Array(25)
@@ -41,19 +40,36 @@ export const RenderLetter = ({ juega, setJuega }) => {
                     </button>
                 </div>
                 <div className={generalStyles.modalOptionsBtn}>
-                    {letters.map((letterB) => (
-                        <button
-                            key={letterB}
-                            className={
-                                letter === letterB
-                                    ? generalStyles.modalBtn + " " + generalStyles.modalBtnActive
-                                    : generalStyles.modalBtn
-                            }
-                            onClick={() => setLetter(letterB)}
-                        >
-                            {letterB}
-                        </button>
-                    ))}
+                    {letters.map((letra) =>
+                        letra !== "Otra" ? (
+                            <button
+                                key={letra}
+                                className={
+                                    letter === letra
+                                        ? generalStyles.modalBtn +
+                                          " " +
+                                          generalStyles.modalBtnActive
+                                        : generalStyles.modalBtn
+                                }
+                                onClick={() => setLetter(letra)}
+                            >
+                                {letra}
+                            </button>
+                        ) : (
+                            <input
+                                key={letra}
+                                className={
+                                    letter === letra
+                                        ? generalStyles.modalBtn +
+                                          " " +
+                                          generalStyles.modalBtnActive
+                                        : generalStyles.modalBtn
+                                }
+                                onChange={(e) => setLetter(e.target.value.toUpperCase())}
+                                style={{ maxWidth: "4.1rem", backgroundColor: "#eab308" }}
+                            />
+                        )
+                    )}
                 </div>
 
                 <div className={generalStyles.bloquesBtnContainer}>
