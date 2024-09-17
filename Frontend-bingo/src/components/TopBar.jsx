@@ -23,7 +23,7 @@ export const TopBar = ({ markedNumbers, lastNumbers, juega, setJuega, letter }) 
                         </p>
                     </div>
                     <h2 className={generalStyles.bannerJuega}>
-                        {letter.length === 1 ? "Juega letra" : "Tabla"}
+                        Juega {letter.length === 1 ? "letra" : "Tabla"}
                         <span> {letter} </span>
                     </h2>
                 </div>
