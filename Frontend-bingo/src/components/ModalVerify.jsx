@@ -16,7 +16,7 @@ export const ModalVerify = ({ verify, setVerify, markedNumbers }) => {
             .map((_, i) => (i === 12 ? "FREE" : true))
     );
 
-    const [tableNumbers, setTableNumbers] = useState([]);
+    const [tableNumbers, setTableNumbers] = useState(Array(25).fill(""));
 
     //^ animacion de confeti Bingo
     const handleConfeti = (newBloquesBtn) => {
