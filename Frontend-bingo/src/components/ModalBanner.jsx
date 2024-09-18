@@ -22,7 +22,7 @@ export const ModalBanner = ({
                     ? generalStyles.modal
                     : generalStyles.modal + " " + generalStyles.modalActive
             }
-            style={{ minHeight: "10rem ", top: "calc(50vh - 5rem)" }}
+            style={{ minHeight: "26rem ", top: "calc(50vh - 13rem)" }}
         >
             <div className={generalStyles.modal_header}>
                 <div className={generalStyles.modal_top}>

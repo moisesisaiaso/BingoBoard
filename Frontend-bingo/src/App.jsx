@@ -8,6 +8,9 @@ import { ModalVerify } from "./components/ModalVerify";
 
 import banner from "./assets/icons/banner1.png";
 import question from "./assets/icons/question.png";
+import telephone from "./assets/icons/telephone.png";
+import email from "./assets/icons/email.png";
+
 import { ModalBanner } from "./components/ModalBanner";
 
 function App() {
@@ -90,6 +93,18 @@ function App() {
                 <p>&copy; DESARROLLADO POR MOISES ISAIAS ORTIZ GRACIA</p>
                 <div className={generalStyles.footerInfo}>
                     <img src={question} alt="" />
+                    {/* contactame */}
+                    <div className={generalStyles.contact}>
+                        <h2>Contáctame</h2>
+                        <div>
+                            <img src={telephone} alt="" />
+                            <span>(+593) 096 971 8160</span>
+                        </div>
+                        <div>
+                            <img src={email} alt="" />
+                            <span>moises.ortiz@utelvt.edu.ec</span>
+                        </div>
+                    </div>
                 </div>
             </footer>
 
