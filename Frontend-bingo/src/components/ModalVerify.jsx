@@ -190,7 +190,10 @@ export const ModalVerify = ({ verify, setVerify, markedNumbers }) => {
                                     onChange={(event) => handleOnChange(i, event)}
                                     style={
                                         edit && bloque && tableNumbers[i] !== ""
-                                            ? { backgroundColor: "#83DD80" }
+                                            ? {
+                                                  backgroundColor: "#83DD80",
+                                                  border: "1px solid #83DD80",
+                                              }
                                             : tableNumbers[i] === ""
                                             ? {
                                                   backgroundColor: "#e4e4e7",

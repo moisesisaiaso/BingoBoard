@@ -1,7 +1,15 @@
 import React from "react";
 import generalStyles from "../assets/styles/generalStyles.module.css";
 
-export const TopBar = ({ markedNumbers, lastNumbers, juega, setJuega, letter }) => {
+export const TopBar = ({
+    markedNumbers,
+    lastNumbers,
+    juega,
+    setJuega,
+    letter,
+    mainMessage,
+    secundaryMessage,
+}) => {
     return (
         <nav className={generalStyles.topBar}>
             <div className={generalStyles.lastNumbers}>
@@ -16,11 +24,8 @@ export const TopBar = ({ markedNumbers, lastNumbers, juega, setJuega, letter }) 
             <div className={generalStyles.banner}>
                 <div className={generalStyles.banner_content}>
                     <div>
-                        <h2>¡Gran Bingo!, Parroquia San Martín de Porres</h2>
-                        <p>
-                            “El Señor es justo en todos sus caminos y bondadoso en todas sus obras.”
-                            - Salmo 145:17
-                        </p>
+                        <h2>{mainMessage}</h2>
+                        <p>{secundaryMessage}</p>
                     </div>
                     <h2 className={generalStyles.bannerJuega}>
                         Juega {letter.length === 1 ? "letra" : "Tabla"}

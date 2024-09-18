@@ -6,13 +6,15 @@ export const RenderBingoBoard = ({
     setMarkedNummbers,
     lastNumbers,
     setLastNumbers,
+    setLastLetter,
 }) => {
-    const handleNumberClick = (number) => {
+    const handleNumberClick = (letter, number) => {
         if (markedNumbers.includes(number)) {
             setMarkedNummbers(markedNumbers.filter((n) => n !== number));
         } else {
             setMarkedNummbers([...markedNumbers, number]);
             setLastNumbers([number, ...lastNumbers.slice(0, 2)]);
+            setLastLetter(letter);
         }
     };
 
@@ -31,7 +33,7 @@ export const RenderBingoBoard = ({
                                         ? generalStyles.destructive + " " + generalStyles.numberBtn
                                         : generalStyles.outline + " " + generalStyles.numberBtn
                                 }
-                                onClick={() => handleNumberClick(number)}
+                                onClick={() => handleNumberClick(letter, number)}
                             >
                                 {number}
                             </button>

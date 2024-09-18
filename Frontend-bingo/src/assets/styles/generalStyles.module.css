@@ -117,9 +117,15 @@ body {
     border-radius: 10px;
     background-color: white;
     border: var(--borde);
+    cursor: pointer;
 }
 
 .modalBtn.modalBtnActive {
+    background-color: black;
+    color: white;
+}
+
+.modalBtn:hover {
     background-color: black;
     color: white;
 }
@@ -239,6 +245,10 @@ nav .lastNumbers_number {
     text-overflow: ellipsis;
 }
 
+.btnJuega:hover {
+    background-color: #3d3d3e;
+}
+
 /** header */
 
 header {
@@ -247,6 +257,13 @@ header {
     justify-content: space-around;
     align-items: center;
     height: 13rem;
+}
+
+.promotion {
+    width: 100%;
+    padding: 1rem 2rem 0 2rem;
+    margin-bottom: -4.5rem;
+    cursor: pointer;
 }
 
 h1 {
@@ -275,10 +292,17 @@ h1 {
     border: none;
 }
 
+.btnClear:hover {
+    background-color: #fb6363;
+}
 /** modal verify */
 .btnVerify {
     background-color: var(--primary-color);
     color: black;
+}
+
+.btnVerify:hover {
+    background-color: #fbd92f;
 }
 
 .modalBtnsActions:hover {
@@ -337,9 +361,18 @@ h1 {
     color: white;
 }
 
+.destructive:hover {
+    background-color: #fb6363;
+    border: 2px solid #fb6363;
+}
+
 .outline {
     background-color: white;
     color: black;
+}
+
+.outline:hover {
+    background-color: rgb(244, 242, 242);
 }
 
 /* modalPush */
@@ -383,7 +416,8 @@ h1 {
 /** footer */
 footer {
     display: flex;
-    justify-content: center;
+    padding: 1.5rem;
+    justify-content: space-between;
     align-items: center;
     height: 3.5rem;
 }
@@ -396,6 +430,10 @@ footer p {
     font-weight: 600;
     text-shadow: 2px 2px 5px white;
     text-align: center;
+}
+
+.footerInfo {
+    cursor: pointer;
 }
 
 /*^ escritorio pantallas de laptops */
@@ -443,9 +481,11 @@ footer p {
 
 /*^ moviles */
 @media screen and (max-width: 600px) {
-    .banner {
+    .banner,
+    .promotion {
         display: none;
     }
+
     .modal {
         padding: 1rem;
         top: calc(50vh - 22.5rem);

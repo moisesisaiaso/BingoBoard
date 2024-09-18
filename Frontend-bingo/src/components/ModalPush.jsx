@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import generalStyles from "../assets/styles/generalStyles.module.css";
 
-export const ModalPush = ({ lastNumbers }) => {
+export const ModalPush = ({ lastLetter, lastNumbers }) => {
     const [active, setActive] = useState(false);
     const [currentNumber, setCurrentNumber] = useState();
 
     useEffect(() => {
         // obtengo el numero mas resiente
-
         setCurrentNumber(lastNumbers[0]);
+
         if (lastNumbers[0]) {
             setActive(true);
             setTimeout(() => {
@@ -32,7 +32,7 @@ export const ModalPush = ({ lastNumbers }) => {
                         : generalStyles.modalPush + " " + generalStyles.modalPushActive
                 }
             >
-                {currentNumber}
+                {lastLetter}-{currentNumber}
             </div>
         </div>
     );
