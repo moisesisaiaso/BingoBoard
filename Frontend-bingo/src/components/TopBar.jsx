@@ -4,8 +4,8 @@ import generalStyles from "../assets/styles/generalStyles.module.css";
 export const TopBar = ({
     markedNumbers,
     lastNumbers,
-    juega,
-    setJuega,
+    setOpacityLayer,
+    setModal,
     letter,
     mainMessage,
     secundaryMessage,
@@ -34,7 +34,13 @@ export const TopBar = ({
                 </div>
             </div>
 
-            <button className={generalStyles.btnJuega} onClick={() => setJuega(!juega)}>
+            <button
+                className={generalStyles.btnJuega}
+                onClick={() => {
+                    setOpacityLayer(true);
+                    setModal("juegaLetra");
+                }}
+            >
                 Juega letra ?
             </button>
         </nav>

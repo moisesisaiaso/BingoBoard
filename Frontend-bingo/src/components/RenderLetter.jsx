@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import generalStyles from "../assets/styles/generalStyles.module.css";
 
-export const RenderLetter = ({ juega, setJuega, letter, setLetter }) => {
+export const RenderLetter = ({
+    modal,
+    setModal,
+    opacityLayer,
+    setOpacityLayer,
+    letter,
+    setLetter,
+}) => {
     const letters = ["B", "I", "N", "G", "O", "Completa", "Otra"];
 
     const [bloquesBtn, setBloquesBtn] = useState(
@@ -27,15 +34,24 @@ export const RenderLetter = ({ juega, setJuega, letter, setLetter }) => {
     }, [letter]);
 
     return (
+        //  modal !== "juegaLetra" || !opacityLayer   es decir si modal es diferente a el nombre que se espera quiere decir que se cerro con el boton X , o si !opacityLayer es falso quiere decir que se cierra el modal a traves la capa de opacidad al darle click cambia a false
         <section
             className={
-                !juega ? generalStyles.modal : generalStyles.modal + " " + generalStyles.modalActive
+                modal !== "juegaLetra" || !opacityLayer // cierran o abren el modal, si se cumple una de las condiciones el modal se cierra, de lo contrario se abre
+                    ? generalStyles.modal
+                    : generalStyles.modal + " " + generalStyles.modalActive
             }
         >
             <div className={generalStyles.modal_header}>
                 <div className={generalStyles.modal_top}>
                     <span>{letter.length > 1 ? letter : `Letra ${letter}`}</span>
-                    <button className={generalStyles.modalClose} onClick={() => setJuega(false)}>
+                    <button
+                        className={generalStyles.modalClose}
+                        onClick={() => {
+                            setOpacityLayer(false);
+                            setModal("");
+                        }}
+                    >
                         X
                     </button>
                 </div>

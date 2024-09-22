@@ -7,6 +7,7 @@ export const RenderBingoBoard = ({
     lastNumbers,
     setLastNumbers,
     setLastLetter,
+    setCaptureClick,
 }) => {
     const handleNumberClick = (letter, number) => {
         if (markedNumbers.includes(number)) {
@@ -16,6 +17,7 @@ export const RenderBingoBoard = ({
             setLastNumbers([number, ...lastNumbers.slice(0, 2)]);
             setLastLetter(letter);
         }
+        setCaptureClick(true);
     };
 
     const letters = ["B", "I", "N", "G", "O"];

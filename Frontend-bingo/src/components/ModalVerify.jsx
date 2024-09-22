@@ -3,7 +3,13 @@ import generalStyles from "../assets/styles/generalStyles.module.css";
 
 import confetti from "canvas-confetti";
 
-export const ModalVerify = ({ verify, setVerify, markedNumbers }) => {
+export const ModalVerify = ({
+    markedNumbers,
+    captureClick,
+    setCaptureClick,
+    setTablaGanadora,
+    tableNumber,
+}) => {
     const [optionsBtn, setOptionsBtn] = useState("verificar");
 
     const [duplicates, setDuplicates] = useState(false);
@@ -20,7 +26,12 @@ export const ModalVerify = ({ verify, setVerify, markedNumbers }) => {
 
     //^ animacion de confeti Bingo
     const handleConfeti = (newBloquesBtn) => {
-        if (!newBloquesBtn.includes(false)) {
+        const tieneNumero = tableNumbers.some((element) => typeof element === "number");
+        if (!newBloquesBtn.includes(false) && tieneNumero) {
+            // Mando el numero de la tabla ganadora
+            setTablaGanadora(tableNumber);
+
+            // animacion de confeti
             const intervalId = setInterval(() => {
                 confetti({
                     particleCount: 300,
@@ -65,6 +76,7 @@ export const ModalVerify = ({ verify, setVerify, markedNumbers }) => {
             // cambia a editar
             setOptionsBtn("editar");
             setEdit(true);
+            setCaptureClick(false);
         } else if (action === "editar") {
             setBloquesBtn(bloquesBtn.map((_, i) => (1 === 12 ? "FREE" : true)));
 
@@ -72,18 +84,18 @@ export const ModalVerify = ({ verify, setVerify, markedNumbers }) => {
             setOptionsBtn("verificar");
             setEdit(false);
         }
-
-        console.log(markedNumbers);
-        console.log(tableNumbers);
     };
 
-    console.log(bloquesBtn);
+    useEffect(() => {
+        captureClick && handleAction("verificar");
+    }, [captureClick]);
+
     //^ captura de numeros
     const handleOnChange = (i, event) => {
         const newTableNumbers = [...tableNumbers];
         const { value } = event.target;
 
-        value ? (newTableNumbers[i] = parseInt(event.target.value)) : (newTableNumbers[i] = "");
+        value ? (newTableNumbers[i] = parseInt(value)) : (newTableNumbers[i] = "");
 
         setTableNumbers(newTableNumbers);
     };
@@ -97,116 +109,81 @@ export const ModalVerify = ({ verify, setVerify, markedNumbers }) => {
     };
 
     return (
-        <div
-            className={
-                verify
-                    ? generalStyles.modalPushContainer + " " + generalStyles.active
-                    : generalStyles.modalPushContainer
-            }
-        >
-            <section
-                className={
-                    !verify
-                        ? generalStyles.modal
-                        : generalStyles.modal + " " + generalStyles.modalActive
-                }
-            >
-                <div className={generalStyles.modal_header}>
-                    <div className={generalStyles.modal_top}>
-                        <span>
-                            Verifica la tabla{" "}
-                            <h6 style={{ color: "#ef4444" }}>
-                                {duplicates && "!Número duplicado!"}
-                            </h6>
-                        </span>
-                        <button
-                            className={generalStyles.modalClose}
-                            onClick={() => setVerify(false)}
-                        >
-                            X
-                        </button>
-                    </div>
-                    <div className={generalStyles.modalOptionsBtn}>
-                        {optionsBtn === "verificar" ? (
-                            <button
-                                className={
-                                    generalStyles.modalBtn + " " + generalStyles.modalBtnsActions
-                                }
-                                onClick={() => handleAction("verificar")}
-                            >
-                                Verificar
-                            </button>
-                        ) : (
-                            <button
-                                className={
-                                    generalStyles.modalBtn + " " + generalStyles.modalBtnsActions
-                                }
-                                onClick={() => handleAction("editar")}
-                            >
-                                Editar
-                            </button>
-                        )}
+        <>
+            <h6 className={generalStyles.modal_verificarValidation}>
+                {duplicates && "!Número duplicado!"}
+            </h6>
+            <div className={generalStyles.modalOptionsBtn}>
+                {optionsBtn === "verificar" ? (
+                    <button
+                        className={generalStyles.modalBtn + " " + generalStyles.modalBtnsActions}
+                        onClick={() => handleAction("verificar")}
+                    >
+                        Verificar
+                    </button>
+                ) : (
+                    <button
+                        className={generalStyles.modalBtn + " " + generalStyles.modalBtnsActions}
+                        onClick={() => handleAction("editar")}
+                    >
+                        Editar
+                    </button>
+                )}
 
-                        <button
+                <button
+                    className={generalStyles.modalBtn + " " + generalStyles.modalBtnsActions}
+                    onClick={() => handleClear()}
+                >
+                    Limpiar
+                </button>
+            </div>
+
+            <div className={generalStyles.bloquesBtnContainer}>
+                {bloquesBtn.map((bloque, i) =>
+                    i === 12 ? (
+                        <input
+                            type="text"
+                            key={i}
+                            className={generalStyles.bloquesBtn}
+                            value={"FREE"}
+                            disabled
+                            style={{
+                                backgroundColor: "#e4e4e7",
+                                border: "1px solid #e4e4e7",
+                                textShadow: "0px 2px 2px white",
+                                letterSpacing: "1px",
+                                color: "black",
+                            }}
+                        />
+                    ) : (
+                        <input
+                            type="text"
+                            key={i}
                             className={
-                                generalStyles.modalBtn + " " + generalStyles.modalBtnsActions
+                                !bloque
+                                    ? generalStyles.bloquesBtn + " " + generalStyles.destructive
+                                    : generalStyles.bloquesBtn + " " + generalStyles.outline
                             }
-                            onClick={() => handleClear()}
-                        >
-                            Limpiar
-                        </button>
-                    </div>
-
-                    <div className={generalStyles.bloquesBtnContainer}>
-                        {bloquesBtn.map((bloque, i) =>
-                            i === 12 ? (
-                                <input
-                                    type="text"
-                                    key={i}
-                                    className={generalStyles.bloquesBtn}
-                                    value={"FREE"}
-                                    disabled
-                                    style={{
-                                        backgroundColor: "#e4e4e7",
-                                        border: "1px solid #e4e4e7",
-                                        textShadow: "0px 2px 2px white",
-                                        letterSpacing: "1px",
-                                        color: "black",
-                                    }}
-                                />
-                            ) : (
-                                <input
-                                    type="text"
-                                    key={i}
-                                    className={
-                                        !bloque
-                                            ? generalStyles.bloquesBtn +
-                                              " " +
-                                              generalStyles.destructive
-                                            : generalStyles.bloquesBtn + " " + generalStyles.outline
-                                    }
-                                    value={tableNumbers[i] && tableNumbers[i]}
-                                    disabled={edit}
-                                    onChange={(event) => handleOnChange(i, event)}
-                                    style={
-                                        edit && bloque && tableNumbers[i] !== ""
-                                            ? {
-                                                  backgroundColor: "#83DD80",
-                                                  border: "1px solid #83DD80",
-                                              }
-                                            : tableNumbers[i] === ""
-                                            ? {
-                                                  backgroundColor: "#e4e4e7",
-                                                  border: "1px solid #e4e4e7",
-                                              }
-                                            : {}
-                                    }
-                                />
-                            )
-                        )}
-                    </div>
-                </div>
-            </section>
-        </div>
+                            value={tableNumbers[i]}
+                            disabled={edit}
+                            onChange={(event) => handleOnChange(i, event)}
+                            style={
+                                edit && bloque && tableNumbers[i] !== ""
+                                    ? {
+                                          backgroundColor: "#83DD80",
+                                          border: "1px solid #83DD80",
+                                      }
+                                    : tableNumbers[i] === ""
+                                    ? {
+                                          backgroundColor: "#e4e4e7",
+                                          border: "1px solid #e4e4e7",
+                                      }
+                                    : {}
+                            }
+                        />
+                    )
+                )}
+            </div>
+        </>
     );
 };

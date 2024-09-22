@@ -3,11 +3,13 @@ import generalStyles from "../assets/styles/generalStyles.module.css";
 import TextField from "@mui/material/TextField";
 
 export const ModalBanner = ({
-    bannerEdit,
-    setBannerEdit,
+    modal,
+    setModal,
+    opacityLayer,
+    setOpacityLayer,
     mainMessage,
-    secundaryMessage,
     setMainMessage,
+    secundaryMessage,
     setSecundaryMessage,
 }) => {
     const handleClear = () => {
@@ -18,7 +20,7 @@ export const ModalBanner = ({
     return (
         <section
             className={
-                !bannerEdit
+                modal !== "banner" || !opacityLayer
                     ? generalStyles.modal
                     : generalStyles.modal + " " + generalStyles.modalActive
             }
@@ -29,7 +31,10 @@ export const ModalBanner = ({
                     <span>Banner Publicitario</span>
                     <button
                         className={generalStyles.modalClose}
-                        onClick={() => setBannerEdit(false)}
+                        onClick={() => {
+                            setOpacityLayer(false);
+                            setModal("");
+                        }}
                     >
                         X
                     </button>
