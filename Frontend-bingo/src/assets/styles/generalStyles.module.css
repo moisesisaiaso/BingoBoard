@@ -403,6 +403,9 @@ h1 {
 .btnClear,
 .btnVerify,
 .btnPlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 9rem;
     height: 4rem;
     font-size: 1.5rem;
@@ -743,11 +746,28 @@ footer p {
 
     /* modal Game Boards */
     .modalGameBoards {
-        padding: 1rem;
+        padding: 0.5rem;
+    }
+
+    .modal_top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 0.5rem;
     }
 
     .gameAction_clear {
         font-size: 1rem;
+    }
+
+    .btnClear,
+    .btnVerify {
+        width: 48%;
+        padding: 0 0.5rem;
+    }
+
+    .game_verifyBoard {
+        padding: 1rem;
     }
 
     /* footer */
