@@ -55,11 +55,15 @@ export const ModalGameBoards = ({
                         X
                     </button>
                 </div>
-                <h6 className={generalStyles.modal_verificarValidation}>
-                    {!isNumber && "⚠️ Solo se permiten números"}
-                </h6>
+                {!isNumber && (
+                    <h6 className={generalStyles.modal_verificarValidation}>
+                        ⚠️ Solo se permiten números
+                    </h6>
+                )}
                 {tablaGanadora && (
-                    <h6>{tablaGanadora && `La tabla ganadora es la N# ${tablaGanadora}`}</h6>
+                    <h3 style={{ color: "#58f47d" }}>
+                        {tablaGanadora && `🎉 Tabla ganadora: N# ${tablaGanadora} 🎉`}
+                    </h3>
                 )}
 
                 <div className={generalStyles.gameAction}>
@@ -102,7 +106,7 @@ export const ModalGameBoards = ({
             <section className={generalStyles.gameBoards_body}>
                 {[...Array(numTables)].map((_, i) => (
                     <div className={generalStyles.game_verifyBoard} key={i}>
-                        <h3>Tabla N# {i + 1}</h3>
+                        <h2>Tabla N# {i + 1}</h2>
                         <ModalVerify
                             markedNumbers={markedNumbers}
                             captureClick={captureClick}

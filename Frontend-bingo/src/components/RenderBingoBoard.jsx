@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import generalStyles from "../assets/styles/generalStyles.module.css";
+import { getNumRandom } from "../helpers/getNumRandom";
 
 export const RenderBingoBoard = ({
     markedNumbers,
@@ -8,6 +9,8 @@ export const RenderBingoBoard = ({
     setLastNumbers,
     setLastLetter,
     setCaptureClick,
+    random,
+    setRandom,
 }) => {
     const handleNumberClick = (letter, number) => {
         if (markedNumbers.includes(number)) {
@@ -19,6 +22,20 @@ export const RenderBingoBoard = ({
         }
         setCaptureClick(true);
     };
+
+    const handleNumRandom = async () => {
+        const randomValue = await getNumRandom(markedNumbers);
+        const [letter, number] = randomValue;
+
+        handleNumberClick(letter, number);
+
+        setRandom(false);
+    };
+
+    // aleatorio
+    useEffect(() => {
+        random && handleNumRandom();
+    }, [random]);
 
     const letters = ["B", "I", "N", "G", "O"];
     return (

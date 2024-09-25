@@ -42,6 +42,9 @@ function App() {
     // tabla ganadora
     const [tablaGanadora, setTablaGanadora] = useState(0);
 
+    // numero aleatorio
+    const [random, setRandom] = useState(false);
+
     const handleClearBoard = () => {
         setMarkedNummbers([]);
         setLastNumbers([]);
@@ -100,6 +103,9 @@ function App() {
                     >
                         VERIFICAR
                     </button>
+                    <button className={generalStyles.btnPlay} onClick={() => setRandom(true)}>
+                        ALEATORIO
+                    </button>
                 </div>
             </header>
 
@@ -113,6 +119,8 @@ function App() {
                         lastNumbers={lastNumbers}
                         setLastNumbers={setLastNumbers}
                         setCaptureClick={setCaptureClick}
+                        random={random}
+                        setRandom={setRandom}
                     />
                 </div>
             </section>
