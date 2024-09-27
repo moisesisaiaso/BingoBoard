@@ -45,6 +45,9 @@ function App() {
     // numero aleatorio
     const [random, setRandom] = useState(false);
 
+    // bloques seleccionados en renderLetter
+    const [bloquesSelected, setBloquesSelected] = useState([]);
+
     const handleClearBoard = () => {
         setMarkedNummbers([]);
         setLastNumbers([]);
@@ -133,6 +136,8 @@ function App() {
                 setOpacityLayer={setOpacityLayer}
                 letter={letter}
                 setLetter={setLetter}
+                bloquesSelected={bloquesSelected}
+                setBloquesSelected={setBloquesSelected}
             />
 
             {/* modal Push */}
@@ -165,6 +170,7 @@ function App() {
                         captureClick={captureClick}
                         setCaptureClick={setCaptureClick}
                         setTablaGanadora={setTablaGanadora}
+                        bloquesSelected={bloquesSelected}
                     />
                 </div>
             </section>
@@ -191,6 +197,7 @@ function App() {
                 setCaptureClick={setCaptureClick}
                 tablaGanadora={tablaGanadora}
                 setTablaGanadora={setTablaGanadora}
+                bloquesSelected={bloquesSelected}
             />
 
             <footer>

@@ -8,6 +8,8 @@ export const RenderLetter = ({
     setOpacityLayer,
     letter,
     setLetter,
+    bloquesSelected,
+    setBloquesSelected,
 }) => {
     const letters = ["B", "I", "N", "G", "O", "Completa", "Otra"];
 
@@ -33,6 +35,17 @@ export const RenderLetter = ({
         setBloquesBtn(newBloquesBtn);
     }, [letter]);
 
+    // genero un array con los indices del array bloquesBtn que tienen un valor true
+
+    useEffect(() => {
+        const indexBloques = bloquesBtn.map((bloque, i) => (bloque === true ? i : false));
+
+        const filterIndex = indexBloques.filter((element) => element !== false);
+
+        setBloquesSelected(filterIndex);
+    }, [bloquesBtn]);
+
+    console.log("bloques seleccionados: " + bloquesSelected);
     return (
         //  modal !== "juegaLetra" || !opacityLayer   es decir si modal es diferente a el nombre que se espera quiere decir que se cerro con el boton X , o si !opacityLayer es falso quiere decir que se cierra el modal a traves la capa de opacidad al darle click cambia a false
         <section

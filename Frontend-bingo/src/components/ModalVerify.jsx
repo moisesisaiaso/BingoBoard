@@ -9,10 +9,13 @@ export const ModalVerify = ({
     setCaptureClick,
     setTablaGanadora,
     tableNumber,
+    bloquesSelected,
 }) => {
     const [optionsBtn, setOptionsBtn] = useState("verificar");
 
     const [duplicates, setDuplicates] = useState(false);
+
+    const [letraIncompleta, setLetraIncompleta] = useState(false);
 
     const [edit, setEdit] = useState(false);
 
@@ -26,8 +29,18 @@ export const ModalVerify = ({
 
     //^ animacion de confeti Bingo
     const handleConfeti = (newBloquesBtn) => {
+        // tieneNumero ?  para que no de ganador cuando la tabla este vacia ya que al estar vacia todos sus bloques estan en true, y al menos debe haber un numero
         const tieneNumero = tableNumbers.some((element) => typeof element === "number");
-        if (!newBloquesBtn.includes(false) && tieneNumero) {
+
+        const filterSelected = bloquesSelected.map((index) => newBloquesBtn[index]);
+
+        // obtiene la respuesta para la condicion si no existe bloques seleccionados en renderLetter,es decir, esun juego libre, de lo contrario quiere decir que hay existen bloques eleccionados a evaluar
+        const LibreObloquesSeleccionados =
+            bloquesSelected.length === 0
+                ? !newBloquesBtn.includes(false)
+                : !filterSelected.includes(false) && !letraIncompleta;
+
+        if (LibreObloquesSeleccionados && tieneNumero) {
             // Mando el numero de la tabla ganadora
             setTablaGanadora(tableNumber);
 
@@ -59,6 +72,17 @@ export const ModalVerify = ({
             return;
         }
         setDuplicates(false);
+
+        // verificar si los bloques que conforman la letra a jugar tienen numero
+        bloquesSelected.forEach((bloqueIndex) => {
+            const incompleto = !tableNumbers[bloqueIndex] ? true : false;
+
+            if (incompleto) {
+                setLetraIncompleta(incompleto);
+                return;
+            }
+            setLetraIncompleta(incompleto);
+        });
 
         if (action === "verificar") {
             const newBloquesBtn = [...bloquesBtn];
@@ -113,6 +137,7 @@ export const ModalVerify = ({
             <h6 className={generalStyles.modal_verificarValidation}>
                 {duplicates && "!Número duplicado!"}
             </h6>
+            {letraIncompleta && <h6>faltan casillas para la letra ganadora</h6>}
             <div className={generalStyles.modalOptionsBtn}>
                 {optionsBtn === "verificar" ? (
                     <button
@@ -137,7 +162,6 @@ export const ModalVerify = ({
                     Limpiar
                 </button>
             </div>
-
             <div className={generalStyles.bloquesBtnContainer}>
                 {bloquesBtn.map((bloque, i) =>
                     i === 12 ? (

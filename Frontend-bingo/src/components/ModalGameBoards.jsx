@@ -12,6 +12,7 @@ export const ModalGameBoards = ({
     setCaptureClick,
     tablaGanadora,
     setTablaGanadora,
+    bloquesSelected,
 }) => {
     const [numTables, setNumTables] = useState(0);
     const [isNumber, setIsNumber] = useState(true);
@@ -113,6 +114,7 @@ export const ModalGameBoards = ({
                             setCaptureClick={setCaptureClick}
                             tableNumber={i + 1}
                             setTablaGanadora={setTablaGanadora}
+                            bloquesSelected={bloquesSelected}
                         />
                     </div>
                 ))}
